@@ -1,7 +1,30 @@
 ## useState
+useState is a React Hook that lets you add a state variable to your component.
+
+const [state, setState] = useState(initialState);
+Call useState at the top level of your component to declare a state variable.
+
+Parameters 
+initialState: The value you want the state to be initially. It can be a value of any type, but there is a special behavior for functions. This argument is ignored after the initial render.
+If you pass a function as initialState, it will be treated as an initializer function. It should be pure, should take no arguments, and should return a value of any type. React will call your initializer function when initializing the component, and store its return value as the initial state. See an example below.
+Returns 
+useState returns an array with exactly two values:
+
+The current state. During the first render, it will match the initialState you have passed.
+The set function that lets you update the state to a different value and trigger a re-render.
 
 ## useEffect
 run a variety of code base on scenario eg loading, offloading, mounting
+useEffect is a React Hook that lets you synchronize a component with an external system.
+
+useEffect(setup, dependencies?)
+Parameters 
+setup: The function with your Effect’s logic. Your setup function may also optionally return a cleanup function. When your component is added to the DOM, React will run your setup function. After every re-render with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. After your component is removed from the DOM, React will run your cleanup function.
+
+optional dependencies: The list of all reactive values referenced inside of the setup code. Reactive values include props, state, and all the variables and functions declared directly inside your component body. If your linter is configured for React, it will verify that every reactive value is correctly specified as a dependency. The list of dependencies must have a constant number of items and be written inline like [dep1, dep2, dep3]. React will compare each dependency with its previous value using the Object.is comparison. If you omit this argument, your Effect will re-run after every re-render of the component. See the difference between passing an array of dependencies, an empty array, and no dependencies at all.
+
+Returns 
+useEffect returns undefined.
 
 ## useCallback
 useCallback is a React Hook that lets you cache a function definition between re-renders.
@@ -43,6 +66,18 @@ On the following renders, React will compare the dependencies with the dependenc
 In other words, useCallback caches a function between re-renders until its dependencies change.
 
 ## useRef
+useRef is a React Hook that lets you reference a value that’s not needed for rendering.
+
+const ref = useRef(initialValue)
+
+Parameters 
+initialValue: The value you want the ref object’s current property to be initially. It can be a value of any type. This argument is ignored after the initial render.
+Returns 
+useRef returns an object with a single property:
+
+current: Initially, it’s set to the initialValue you have passed. You can later set it to something else. If you pass the ref object to React as a ref attribute to a JSX node, React will set its current property.
+On the next renders, useRef will return the same object.
+
 
 ##memoization
 In computing, memoization is used to speed up computer programs by eliminating the repetitive computation of results, and by avoiding repeated calls to functions that process the same input.
